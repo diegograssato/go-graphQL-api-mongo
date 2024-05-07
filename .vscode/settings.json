@@ -1,0 +1,73 @@
+{
+	"files.eol": "\n",
+	"editor.formatOnSave": true,
+	"go.buildTags": "",
+	"go.toolsEnvVars": {
+		"CGO_ENABLED": "0"
+	},
+	"go.useLanguageServer": true,
+	"go.testEnvVars": {
+		"CGO_ENABLED": "1",
+		"GOOS": "linux"
+	},
+	"go.testFlags": [
+		"-v",
+		"-race"
+	],
+	"go.testTimeout": "10s",
+	"go.coverOnSingleTest": true,
+	"go.coverOnSingleTestFile": true,
+	"go.coverOnTestPackage": true,
+	"go.lintTool": "golangci-lint",
+	"go.lintOnSave": "package",
+	"[go]": {
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "always"
+		}
+	},
+	"gopls": {
+		"usePlaceholders": false,
+		"staticcheck": true
+	},
+	"remote.extensionKind": {
+		"ms-azuretools.vscode-docker": "workspace"
+	},
+	"workbench.colorTheme": "Thanos : Infinity Dark - Contrast",
+	"sqltools.connections": [
+		{
+			"name": "PostgreSQL database",
+			"driver": "PostgreSQL",
+			"previewLimit": 50,
+			"server": "postgres",
+			"port": 5432,
+			"database": "postgres",
+			"username": "postgres",
+			"password": "postgres"
+		},
+		{
+			"name": "Mysql database",
+			"driver": "Mysql",
+			"group": "mysql",
+			"previewLimit": 50,
+			"server": "db",
+			"port": 3306,
+			"database": "gopportunities",
+			"username": "root",
+			"password": "root"
+		},
+		{
+			"mysqlOptions": {
+				"authProtocol": "default",
+				"enableSsl": "Disabled"
+			},
+			"previewLimit": 50,
+			"server": "db",
+			"port": 3306,
+			"driver": "MariaDB",
+			"name": "Maria DB database",
+			"group": "mysql",
+			"database": "gopportunities",
+			"username": "root"
+		}
+	]
+}

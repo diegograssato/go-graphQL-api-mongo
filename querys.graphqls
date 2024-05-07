@@ -1,0 +1,13 @@
+mutation createAccount {
+    createAccount(input: {name: "linux ubunbtu", programmingLanguage: "Python & Java"}) {
+        name
+        programmingLanguage
+    }
+}
+
+query queryAccount {
+    Accounts {
+        name
+        programmingLanguage
+    }
+}

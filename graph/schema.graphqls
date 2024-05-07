@@ -1,0 +1,17 @@
+type Account {
+  name: String!
+  programmingLanguage: String!
+}
+
+input NewAccount {
+  name: String!
+  programmingLanguage: String!
+}
+
+type Query {
+  Accounts: [Account!]!
+}
+
+type Mutation {
+  createAccount(input: NewAccount!): Account!
+}
