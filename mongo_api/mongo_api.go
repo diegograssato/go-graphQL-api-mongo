@@ -13,23 +13,25 @@ import (
 
 type Account struct {
 	db                  *mongo.Client
+	collection          *mongo.Collection
 	ID                  primitive.ObjectID `bson:"_id,omitempty"`
 	Name                string             `bson:"name"`
 	ProgrammingLanguage string             `bson:"programmingLanguage"`
 }
 
-func InitMongo(db *mongo.Client) *Account {
-	return &Account{db: db}
+func InitMongo(db *mongo.Client, collection *mongo.Collection) *Account {
+	return &Account{db: db, collection: collection}
+
 }
 
 func (a *Account) GetAll() ([]Account, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	collection := a.db.Database("account").Collection("test_api")
+	//collection := a.db.Database().Collection("graphQL")
 	filter := bson.M{}
 
-	cur, err := collection.Find(ctx, filter)
+	cur, err := a.collection.Find(ctx, filter)
 	if err != nil {
 		log.Fatal("** 4 **", err)
 	}
@@ -56,14 +58,14 @@ func (a *Account) Insert(name, programmingLanguage string) (Account, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	collection := a.db.Database("account").Collection("test_api")
+	//collection := a.db.Database("api").Collection("graphQL")
 	insert := Account{
 		ID:                  primitive.NewObjectID(),
 		Name:                name,
 		ProgrammingLanguage: programmingLanguage,
 	}
 
-	_, err := collection.InsertOne(ctx, insert)
+	_, err := a.collection.InsertOne(ctx, insert)
 	if err != nil {
 		return Account{}, err
 	}

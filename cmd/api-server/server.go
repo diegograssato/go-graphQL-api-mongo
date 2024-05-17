@@ -21,10 +21,16 @@ const defaultPort = "8080"
 //const uri = "mongodb://admin:GtyxQu6S5J@localhost:27017/?connect=direct"
 
 func connect() (*mongo.Client, error) {
-	err := godotenv.Load()
+
+	curDir, err := os.Getwd()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal(err)
 	}
+	loadErr := godotenv.Load(curDir + "/.env")
+	if loadErr != nil {
+		log.Fatalln("can't load env file from current directory: " + curDir)
+	}
+
 	dbURL := os.Getenv("MONGO_URL")
 	fmt.Println(dbURL)
 
@@ -51,9 +57,12 @@ func main() {
 	if err != nil {
 		log.Fatal("Erro ao se conectar com MongoDB", err)
 	}
-	defer c.Disconnect(context.Background())
 
-	ac := mongo_api.InitMongo(c)
+	collection := c.Database("api").Collection("graphQL")
+
+	ac := mongo_api.InitMongo(c, collection)
+
+	defer c.Disconnect(context.Background())
 
 	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{
 		Account: ac,

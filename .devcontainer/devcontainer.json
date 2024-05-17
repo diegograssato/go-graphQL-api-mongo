@@ -24,6 +24,7 @@
 				"golang.Go",
 				"davidanson.vscode-markdownlint",
 				"premparihar.gotestexplorer",
+				"maracko.json-to-go",
 				"mongodb.mongodb-vscode", // For MonogDB
 				"humao.rest-client",
 				"eamodio.gitlens", // IDE Git information
